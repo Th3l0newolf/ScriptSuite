@@ -1,0 +1,98 @@
+TTY Spawn Shell
+Often during pen tests you may obtain a shell without having tty, yet wish to interact further with the system. Here are some commands 
+which will allow you to spawn a tty shell. Obviously some of this will depend on the system environment and installed packages.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Python spawn shell 
+
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Fully Interactive TTY
+All the steps to stabilize your shell
+The first step:
+
+
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+Which uses Python to spawn a better-featured bash shell. At this point, our shell will look a bit prettier, but we still won’t be able to 
+use tab autocomplete or the arrow keys.
+
+Step two is:
+
+export TERM=xterm
+
+This will give us access to term commands such as clear.
+
+Finally (and most importantly) we will background the shell using
+
+Ctrl + Z
+
+Back in our own terminal we use
+
+stty raw -echo; fg
+
+This does two things: first, it turns off our own terminal echo which gives us access to tab autocompletes, the arrow keys, and Ctrl + C to kill processes
+
+
+stty rows 38 columns 116
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+OS system spawn shell
+
+echo os.system("/bin/bash")
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bash spawn shell 
+
+/bin/sh -i
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Perl spawn shell 
+
+perl —e 'exec "/bin/sh";'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ruby spawn shell 
+
+ruby: exec "/bin/sh"
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lua spawn shell 
+
+lua: os.execute("/bin/sh")
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+IRB spawn shell 
+
+exec "/bin/sh"
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+VI spawn shell 
+
+:!bash
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+VI(2) spawn shell 
+
+:set shell=/bin/bash:shell
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Nmap spawn shell 
+
+!sh
+
+
+
+
+
